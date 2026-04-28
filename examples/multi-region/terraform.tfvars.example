@@ -1,0 +1,36 @@
+# Example Terraform Variables for Multi-Region Deployment
+# Copy this file to terraform.tfvars and update with your values
+
+# Primary AWS Region
+primary_region = "us-east-1"
+
+# Additional regions for replication
+# Uncomment and add regions as needed
+additional_regions = [
+  "us-west-2",
+  "eu-west-1"
+]
+
+# KMS key alias for ECR encryption
+kms_key_alias = "ecr-encryption-key"
+
+# Enable automatic key rotation (recommended)
+enable_key_rotation = true
+
+# Enable multi-region KMS key (required for cross-region replication)
+enable_multi_region_key = true
+
+# Repository prefixes for Repository Creation Templates
+repository_prefixes = [
+  "helmchart/",
+  "eksaddon/"
+]
+
+# Tags to apply to all resources in all regions
+tags = {
+  Environment = "production"
+  Project     = "ecr-automation"
+  ManagedBy   = "terraform"
+  Example     = "multi-region"
+  DR          = "enabled"
+}

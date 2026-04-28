@@ -1,0 +1,86 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# Batch Processing Migration Configuration
+# This example migrates 10 commonly used Helm charts for EKS deployments
+
+charts:
+  # Secret Management
+  - name: external-secrets
+    repo_url: https://charts.external-secrets.io
+    repo_name: external-secrets
+    version: 0.9.11
+    namespace: helmchart
+    description: "External Secrets Operator for managing secrets from external sources"
+
+  # Load Balancing
+  - name: aws-load-balancer-controller
+    repo_url: https://aws.github.io/eks-charts
+    repo_name: eks
+    version: 1.7.1
+    namespace: helmchart
+    description: "AWS Load Balancer Controller for ALB/NLB integration"
+
+  # Metrics and Monitoring
+  - name: metrics-server
+    repo_url: https://kubernetes-sigs.github.io/metrics-server/
+    repo_name: metrics-server
+    version: 3.11.0
+    namespace: helmchart
+    description: "Kubernetes Metrics Server for resource metrics"
+
+  # Autoscaling
+  - name: cluster-autoscaler
+    repo_url: https://kubernetes.github.io/autoscaler
+    repo_name: autoscaler
+    version: 9.29.3
+    namespace: helmchart
+    description: "Cluster Autoscaler for automatic node scaling"
+
+  # Storage - EBS
+  - name: aws-ebs-csi-driver
+    repo_url: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+    repo_name: aws-ebs-csi-driver
+    version: 2.28.0
+    namespace: helmchart
+    description: "AWS EBS CSI Driver for EBS volume provisioning"
+
+  # Storage - EFS
+  - name: aws-efs-csi-driver
+    repo_url: https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+    repo_name: aws-efs-csi-driver
+    version: 2.5.6
+    namespace: helmchart
+    description: "AWS EFS CSI Driver for EFS volume provisioning"
+
+  # Monitoring
+  - name: kube-state-metrics
+    repo_url: https://prometheus-community.github.io/helm-charts
+    repo_name: prometheus-community
+    version: 5.15.2
+    namespace: helmchart
+    description: "Kube State Metrics for cluster state monitoring"
+
+  # Certificate Management
+  - name: cert-manager
+    repo_url: https://charts.jetstack.io
+    repo_name: jetstack
+    version: v1.13.3
+    namespace: helmchart
+    description: "Cert Manager for automated certificate management"
+
+  # Ingress
+  - name: ingress-nginx
+    repo_url: https://kubernetes.github.io/ingress-nginx
+    repo_name: ingress-nginx
+    version: 4.9.0
+    namespace: helmchart
+    description: "NGINX Ingress Controller"
+
+  # DNS Management
+  - name: external-dns
+    repo_url: https://kubernetes-sigs.github.io/external-dns/
+    repo_name: external-dns
+    version: 1.14.1
+    namespace: helmchart
+    description: "External DNS for automatic DNS record management"

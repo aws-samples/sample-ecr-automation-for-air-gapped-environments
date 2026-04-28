@@ -1,0 +1,51 @@
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Helm
+*.tgz
+charts/
+Chart.lock
+
+# Docker
+.docker/
+
+# AWS
+.aws/
+
+# Scripts
+*.log
+temp/
+tmp/
+downloads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive
+secrets/
+credentials/
+*.pem
+*.key
+*.crt
+
+# Build artifacts
+build/
+dist/

@@ -1,0 +1,51 @@
+# =============================================================================
+# ECR Configuration Module - Example Variables
+# =============================================================================
+# Copy this file to terraform.tfvars and customize for your environment
+#
+# Two naming patterns supported:
+#   1. Simple (no prefix):  helmchart/external-secrets, helmimage/nginx
+#   2. Prefixed:            d-use1-myteam-app-helmchart/external-secrets
+# =============================================================================
+
+# Project identifier - used for KMS alias and IAM role naming
+project_identifier = "ecr-automation"
+
+# Resource prefix (optional)
+# Leave empty for simple naming: helmchart/chart-name
+# Set for environment-aware naming: d-use1-myteam-app-helmchart/chart-name
+resource_prefix = ""
+
+# Repository Creation Templates
+# Each template creates an ECR prefix that auto-creates repos on first push
+# with KMS encryption, immutable tags, and lifecycle policies
+enable_repository_creation_templates = true
+
+repository_templates = [
+  {
+    prefix      = "helmchart"
+    description = "Helm charts from public and private repositories"
+  },
+  {
+    prefix      = "helmimage"
+    description = "Container images extracted from Helm charts"
+  },
+  {
+    prefix      = "appimage"
+    description = "Application container images"
+  }
+]
+
+# Image tag mutability - IMMUTABLE recommended for production
+image_tag_mutability = "IMMUTABLE"
+
+# Lifecycle policy - expire untagged images after N days
+lifecycle_expiration_days = 2
+
+# Tags
+tags = {
+  Environment = "production"
+  ManagedBy   = "terraform"
+  Pattern     = "ecr-automation-air-gapped"
+  Owner       = "platform-team"
+}

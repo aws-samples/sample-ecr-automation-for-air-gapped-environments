@@ -1,0 +1,90 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# =============================================================================
+# ECR Artifact Manager Configuration File
+# =============================================================================
+# This file defines Helm charts and standalone container images to migrate to ECR
+#
+# Run with:
+#   ./ecr-artifact-manager.sh --config charts-config.yaml --region us-east-1
+# =============================================================================
+
+# =============================================================================
+# SOURCE AUTHENTICATION (Optional)
+# =============================================================================
+# Uncomment to pull from a private registry (Harbor, Artifactory, private ECR, etc.)
+# Credentials are stored in AWS Secrets Manager as JSON:
+#   { "registry_url": "registry.example.com", "username": "user", "password": "pass" }
+#
+source_auth:
+#   secret_name: private-source/registry-credentials
+#   secret_region: us-east-1
+
+# =============================================================================
+# HELM CHARTS SECTION
+# =============================================================================
+# Helm charts to download and push to ECR
+charts:
+  - name: external-secrets
+    repository: https://charts.external-secrets.io
+    chart: external-secrets/external-secrets
+    version: 0.19.2
+  - name: kyverno
+    repository: https://kyverno.github.io/kyverno/
+    chart: kyverno/kyverno
+    version: 3.5.1
+  - name: cost-analyzer
+    repository: https://kubecost.github.io/cost-analyzer/
+    chart: kubecost/cost-analyzer
+    version: 2.6.5
+  - name: keda
+    repository: https://kedacore.github.io/charts
+    chart: kedacore/keda
+    version: 2.17.1
+  - name: argo-cd
+    repository: https://argoproj.github.io/argo-helm
+    chart: argo/argo-cd
+    version: 5.51.4
+  - name: wiz-admission-controller
+    repository: https://wiz-sec.github.io/charts
+    chart: wiz-sec/wiz-admission-controller
+    version: 3.10.4
+  - name: base
+    repository: https://istio-release.storage.googleapis.com/charts
+    chart: istio/base
+    version: 1.26.2
+  - name: istiod
+    repository: https://istio-release.storage.googleapis.com/charts
+    chart: istio/istiod
+    version: 1.26.2
+  - name: amazon-cloudwatch-observability
+    repository: https://aws-observability.github.io/helm-charts
+    chart: aws-observability/amazon-cloudwatch-observability
+    version: 4.3.1
+  - name: aws-efs-csi-driver
+    repository: https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+    chart: aws-efs-csi-driver/aws-efs-csi-driver
+    version: 3.1.2
+  - name: kube-prometheus-stack
+    repository: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-community/kube-prometheus-stack
+    version: 72.6.2
+
+# =============================================================================
+# STANDALONE IMAGES SECTION
+# =============================================================================
+# Standalone container images (not from Helm charts)
+#
+# Two formats supported:
+# 1. Simple format (uses default image suffix from terraform.tfvars):
+#    - docker.io/library/nginx:1.25.0
+#
+# 2. Object format (can specify custom suffix per image):
+#    - image: docker.io/library/nginx:1.25.0
+#      suffix: appimage
+standalone_images:
+  - docker.io/library/busybox:1.36
+  - docker.io/library/alpine:3.18
+  - image: docker.io/library/nginx:1.25.0
+    suffix: appimage

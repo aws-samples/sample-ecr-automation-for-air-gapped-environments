@@ -1,0 +1,38 @@
+# =============================================================================
+# ECR Automation - Example Variables
+# =============================================================================
+# Copy to terraform.tfvars and customize for your environment.
+# =============================================================================
+
+region             = "us-east-1"
+project_identifier = "ecr-automation"
+
+# Resource prefix (optional)
+# Leave empty for simple naming: helmchart/chart-name
+# Set for environment-aware naming: d-use1-myorg-eks-helmchart/chart-name
+resource_prefix = ""
+
+# Repository Creation Templates
+enable_repository_creation_templates = true
+
+repository_templates = [
+  {
+    prefix      = "helmchart"
+    description = "Helm charts from public and private repositories"
+  },
+  {
+    prefix      = "helmimage"
+    description = "Container images extracted from Helm charts"
+  }
+]
+
+# Security settings
+image_tag_mutability     = "IMMUTABLE"
+lifecycle_expiration_days = 2
+
+# Tags
+tags = {
+  Environment = "dev"
+  ManagedBy   = "terraform"
+  Pattern     = "ecr-automation-air-gapped"
+}

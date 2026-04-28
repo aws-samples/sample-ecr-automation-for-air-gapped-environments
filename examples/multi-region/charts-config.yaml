@@ -1,0 +1,17 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# Multi-Region Migration Configuration
+# This configuration will be used to deploy charts to multiple regions
+
+charts:
+  # Example chart for multi-region deployment
+  - name: external-secrets
+    repo_url: https://charts.external-secrets.io
+    repo_name: external-secrets
+    version: 0.9.11
+    namespace: helmchart
+    description: "External Secrets Operator - deployed across multiple regions for HA"
+
+  # Add more charts as needed
+  # Each chart will be replicated to all configured regions

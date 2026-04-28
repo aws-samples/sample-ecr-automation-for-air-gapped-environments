@@ -1,0 +1,25 @@
+# Example Terraform Variables for Single Chart Migration
+# Copy this file to terraform.tfvars and update with your values
+
+# AWS Region where ECR repositories will be created
+aws_region = "us-east-1"
+
+# KMS key alias for ECR encryption
+kms_key_alias = "ecr-encryption-key"
+
+# Enable automatic key rotation (recommended)
+enable_key_rotation = true
+
+# Repository prefixes for Repository Creation Templates
+# This example uses a single prefix for Helm charts
+repository_prefixes = [
+  "helmchart/"
+]
+
+# Tags to apply to all resources
+tags = {
+  Environment = "production"
+  Project     = "ecr-automation"
+  ManagedBy   = "terraform"
+  Example     = "single-chart"
+}
